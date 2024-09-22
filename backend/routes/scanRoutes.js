@@ -1,13 +1,28 @@
-// routes/scanRoutes.js
+// backend/routes/scanRoutes.js
+
 const express = require('express');
 const router = express.Router();
-const { createScan, getScans } = require('../controllers/scanController');
-const { protect } = require('../middleware/authMiddleware');
+const {
+  createScan,
+  getScans,
+  getScanById,
+  deleteScan,
+} = require('../controllers/scanController');
+const authMiddleware = require('../middleware/authMiddleware');
 
-// Create a new scan
-router.post('/', protect, createScan);
+// All routes below are protected
+router.use(authMiddleware);
 
-// Get all scans for a user
-router.get('/', protect, getScans);
+// @route   POST /api/scans
+router.post('/', createScan);
+
+// @route   GET /api/scans
+router.get('/', getScans);
+
+// @route   GET /api/scans/:id
+router.get('/:id', getScanById);
+
+// @route   DELETE /api/scans/:id
+router.delete('/:id', deleteScan);
 
 module.exports = router;

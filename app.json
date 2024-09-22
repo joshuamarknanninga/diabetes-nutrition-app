@@ -1,31 +1,34 @@
+// frontend/app.json
+
 {
-    "expo": {
-      "name": "NutritionApp",
-      "slug": "nutrition-app",
-      "version": "1.0.0",
-      "orientation": "portrait",
-      "icon": "./assets/images/logo.png",
-      "splash": {
-        "image": "./assets/images/splash.png",
-        "resizeMode": "contain",
+  "expo": {
+    "name": "NutritionApp",
+    "slug": "nutrition-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logo.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "updates": {
-        "fallbackToCacheTimeout": 0
-      },
-      "assetBundlePatterns": ["**/*"],
-      "ios": {
-        "supportsTablet": true
-      },
-      "android": {
-        "adaptiveIcon": {
-          "foregroundImage": "./assets/images/adaptive-icon.png",
-          "backgroundColor": "#ffffff"
-        }
-      },
-      "web": {
-        "favicon": "./assets/images/favicon.png"
       }
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
     }
   }
-  
+}
