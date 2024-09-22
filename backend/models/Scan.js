@@ -5,24 +5,36 @@ const ScanSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
   upc: {
     type: String,
-    required: true,
+    required: true
   },
   productName: {
     type: String,
-    required: true,
+    required: true
   },
-  brand: String,
-  servingSize: String,
-  totalCarbs: Number,
-  nutrients: Object,
+  brand: {
+    type: String,
+    default: 'Unknown'
+  },
+  servingSize: {
+    type: String,
+    required: true
+  },
+  totalCarbs: {
+    type: Number,
+    required: true
+  },
+  nutrients: {
+    type: Object,
+    default: {}
+  },
   scannedAt: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 });
 
 module.exports = mongoose.model('Scan', ScanSchema);

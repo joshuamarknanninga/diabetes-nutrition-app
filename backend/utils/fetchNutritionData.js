@@ -5,25 +5,25 @@ require('dotenv').config();
 const fetchNutritionData = async (upc) => {
   try {
     const apiKey = process.env.USDA_API_KEY;
-
-    // First, search for the UPC code
-    const searchResponse = await axios.get('https://api.nal.usda.gov/fdc/v1/foods/search', {
-      params: {
-        api_key: apiKey,
-        query: upc,
-        dataType: ['Branded'],
-        pageSize: 1,
-      },
-    });
+    const response = await axios.get(
+      `https://api.nal.usda.gov/fdc/v1/foods/search`,
+      {
+        params: {
+          query: upc,
+          api_key: apiKey,
+          pageSize: 1
+        }
+      }
+    );
 
     if (
-      searchResponse.data.foods &&
-      searchResponse.data.foods.length > 0
+      response.data &&
+      response.data.foods &&
+      response.data.foods.length > 0
     ) {
-      const food = searchResponse.data.foods[0];
-
-      // Extract nutrients
+      const food = response.data.foods[0];
       const nutrients = {};
+
       food.foodNutrients.forEach((nutrient) => {
         nutrients[nutrient.nutrientName] = nutrient.value;
       });
@@ -33,7 +33,7 @@ const fetchNutritionData = async (upc) => {
         brand: food.brandOwner || 'Unknown',
         servingSize: `${food.servingSize} ${food.servingSizeUnit}`,
         totalCarbs: nutrients['Carbohydrate, by difference'] || 0,
-        nutrients,
+        nutrients
       };
     } else {
       return null;

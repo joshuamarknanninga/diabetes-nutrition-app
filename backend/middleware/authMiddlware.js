@@ -6,7 +6,7 @@ require('dotenv').config();
 const protect = async (req, res, next) => {
   let token;
 
-  // Check for token in Authorization header
+  // Check for token in headers
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -23,7 +23,7 @@ const protect = async (req, res, next) => {
 
       next();
     } catch (error) {
-      console.error(error);
+      console.error('Error in protect middleware:', error.message);
       res.status(401).json({ message: 'Not authorized, token failed' });
     }
   }
